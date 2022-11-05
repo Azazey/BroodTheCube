@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -27,7 +26,7 @@ public class Pool<T> where T : MonoBehaviour
         _autoExpand = autoExpand;
         CreatePool(count);
     }
-    
+
     public T GetFreeElement()
     {
         if (HasFreeElement(out var element))

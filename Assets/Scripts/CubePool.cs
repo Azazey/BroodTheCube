@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class CubePool : MonoBehaviour
 {
@@ -12,8 +7,7 @@ public class CubePool : MonoBehaviour
     [SerializeField] private Cube _cubePrefab;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float _spawnTimer;
-    [SerializeField] private UI _ui;
-    
+
     private Pool<Cube> _pool;
     private float _cubeSpeed;
     private float _cubeDistance;
@@ -40,17 +34,8 @@ public class CubePool : MonoBehaviour
     {
         _pool = new Pool<Cube>(_cubePrefab, _poolCount, _autoExpand, transform);
         Invoke("CreateCube", _spawnTimer);
-        StartCoroutine(_ui.CubeSpawnTime(_spawnTimer));
         _cubeSpeed = 2;
         _cubeDistance = 50;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            CreateCube();
-        }
     }
 
     public void CreateCube()
@@ -60,6 +45,5 @@ public class CubePool : MonoBehaviour
         cube.Speed = _cubeSpeed;
         cube.MaxDistance = _cubeDistance;
         Invoke("CreateCube", _spawnTimer);
-        StartCoroutine(_ui.CubeSpawnTime(_spawnTimer));
     }
 }

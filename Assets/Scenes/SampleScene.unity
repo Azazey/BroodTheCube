@@ -660,6 +660,9 @@ MonoBehaviour:
   _distance: {fileID: 1873352421}
   _time: {fileID: 159847546}
   _timer: {fileID: 1123343936}
+  _speedInput: {fileID: 1407601730}
+  _distanceInput: {fileID: 1577749885}
+  _timeInput: {fileID: 40919616}
 --- !u!114 &83093450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3819,7 +3822,6 @@ MonoBehaviour:
   _cubePrefab: {fileID: 6669202336007468635, guid: 69119b5b709f70447a0204472c985b22, type: 3}
   _spawnPoint: {fileID: 919932454}
   _spawnTimer: 3
-  _ui: {fileID: 83093449}
 --- !u!4 &1966927443
 Transform:
   m_ObjectHideFlags: 0

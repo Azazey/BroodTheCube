@@ -1,14 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
     [SerializeField] private float _maxDistance;
     [SerializeField] private float _speed;
-
-    private Coroutine _lifeCoroutine;
 
     public float MaxDistance
     {
@@ -28,12 +23,7 @@ public class Cube : MonoBehaviour
             new Vector3(transform.position.x, transform.position.y, _maxDistance), _speed * Time.deltaTime);
         if (transform.position.z >= _maxDistance)
         {
-            Deactivate();
+            gameObject.SetActive(false);
         }
-    }
-
-    private void Deactivate()
-    {
-        gameObject.SetActive(false);
     }
 }

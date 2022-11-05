@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +9,12 @@ public class UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _distance;
     [SerializeField] private TextMeshProUGUI _time;
     [SerializeField] private TextMeshProUGUI _timer;
+    [SerializeField] private TMP_InputField _speedInput;
+    [SerializeField] private TMP_InputField _distanceInput;
+    [SerializeField] private TMP_InputField _timeInput;
+
+
+    private float _timeCounter;
 
     public void SetSpeed(string speed)
     {
@@ -21,7 +24,7 @@ public class UI : MonoBehaviour
             _speed.text = $"Speed:{speed}";
         }
     }
-    
+
     public void SetDistance(string distance)
     {
         if (Checkers.isDigits(distance))
@@ -30,7 +33,7 @@ public class UI : MonoBehaviour
             _distance.text = $"Distance:{distance}";
         }
     }
-    
+
     public void SetSpawnTime(string time)
     {
         if (Checkers.isDigits(time))
@@ -39,20 +42,32 @@ public class UI : MonoBehaviour
             _time.text = $"Time:{time}";
         }
     }
-    
-    public IEnumerator CubeSpawnTime(float timeToSpawn)
+
+    private void Update()
     {
-        for (float i = 0; i < timeToSpawn; i += Time.deltaTime)
-        {
-            _timer.text = "Spawn process:" + Math.Round(i / timeToSpawn * 100) + "%";
-            yield return null;
-        }
+        SpawnTimer();
     }
 
-    private void Start()
+    private void SpawnTimer()
+    {
+        _timeCounter += Time.deltaTime;
+        _timer.text = "Spawn process:" + Math.Round(_timeCounter / _cubePool.SpawnTimer * 100) + "%";
+        if (_timeCounter >= _cubePool.SpawnTimer)
+            _timeCounter = 0;
+    }
+
+    private void Innit()
     {
         SetSpeed(_cubePool.CubeSpeed.ToString());
         SetDistance(_cubePool.CubeDistance.ToString());
         SetSpawnTime(_cubePool.SpawnTimer.ToString());
+        _speedInput.text = _cubePool.CubeSpeed.ToString();
+        _distanceInput.text = _cubePool.CubeDistance.ToString();
+        _timeInput.text = _cubePool.SpawnTimer.ToString();
+    }
+
+    private void Start()
+    {
+        Innit();
     }
 }
